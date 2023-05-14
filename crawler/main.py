@@ -25,6 +25,7 @@ class Config:
         'miu': 0,
         'sigma': 0.5
     }
+    dump_data_path = '../../miaoshou.txt'
 
 
 d = Delay(ub=Config.delay['upper_bound'])
@@ -36,7 +37,7 @@ def fetch(urls):
         d.delay(3)
         rsp = requests.get(url, headers=Config.headers)
         tree = etree.HTML(rsp.content)
-        ret = [tree.xpath('/html/body/div[5]/div[{}]/div/div[2]/p[1]/a/@href'.format(i))[0] for i in range(1, 2)]
+        ret = [tree.xpath('/html/body/div[5]/div[{}]/div/div[2]/p[1]/a/@href'.format(i))[0] for i in range(1, 21)]
         result += ret
     return map(lambda suffix: Config.baseURL + suffix, result)
 
@@ -62,7 +63,7 @@ def get_urls():
         result = []
         task_lst = []
         for i in range(0, 1):
-            urls = [Config.URL.format(idx + i * 10) for idx in range(1, 2)]
+            urls = [Config.URL.format(idx + i * 10) for idx in range(1, 4)]
             task = t.submit(fetch, urls)
             task_lst.append(task)
 
@@ -72,14 +73,19 @@ def get_urls():
     return result
 
 
+def dumpData(data):
+    with open(Config.dump_data_path, 'w', encoding="utf-8") as f:
+        for line in data:
+            f.write('|'.join(line) + '\n')
+
 # URL = "https://www.miaoshou.net/question/YqxrB378eQmge6R8.html"
 def main():
     url_list = get_urls()
-    tasks = [asyncio.ensure_future(get_and_parse_page(url, parse_miaoshou)) for url in url_list[:1]]
+    tasks = [asyncio.ensure_future(get_and_parse_page(url, parse_miaoshou)) for url in url_list[:3]]
     loop = asyncio.get_event_loop()
     tasks = asyncio.gather(*tasks)
     res = loop.run_until_complete(tasks)
-    print(res)
+    dumpData(res)
 
 
 if __name__ == '__main__':
