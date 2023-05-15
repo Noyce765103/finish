@@ -14,3 +14,7 @@
 五月主打的就是收集数据
 
 ---
+
+## Reference
+
+1. [python异步下载文件教程（主打全面）](https://blog.51cto.com/lilongsy/6149231)
