@@ -24,3 +24,6 @@
 ## Paper
 ### RLHF
 1. [RAFT: Reward rAnked FineTuning for Generative Foundation Model Alignment](https://arxiv.org/pdf/2304.06767.pdf)
+
+### Reasoning
+1. [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/pdf/2210.03629.pdf)
