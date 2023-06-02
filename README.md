@@ -19,3 +19,8 @@
 
 1. [python异步下载文件教程（主打全面）](https://blog.51cto.com/lilongsy/6149231)
 2. [利用LLM做多模态任务](https://zhuanlan.zhihu.com/p/616351346)
+
+
+## Paper
+### RLHF
+1. [RAFT: Reward rAnked FineTuning for Generative Foundation Model Alignment](https://arxiv.org/pdf/2304.06767.pdf)
