@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from lxml import etree
 
-from crawler.common.delay import Delay
+from common.delay import Delay
 
 ua = UserAgent()
 
@@ -17,7 +17,7 @@ class Config:
     baseURL = "https://www.miaoshou.net"
     headers = {
         'User-Agent': ua.random,
-        'Referer': 'https://www.miaoshou.net/'
+        'Referer': 'https://www.youlai.cn/dise/pk_4_0_1.html'
     }
     delay = {
         'upper_bound': 4,
@@ -48,6 +48,38 @@ def parse_miaoshou(Content):
     answer = tree.xpath('//*[@id="main"]/div[2]/div[2]/div[2]/div[1]/div/text()')[0]
     suggestion = tree.xpath('//*[@id="main"]/div[2]/div[2]/div[2]/div[2]/div/text()')[0]
     return [question, answer, suggestion]
+
+
+def parse_youlai(Content):
+    tree = etree.HTML(Content)
+    departments = tree.xpath('/html/body/div[3]/div[1]/dl/dt/p[1]/span/a/text()')
+    related_symptom = tree.xpath('/html/body/div[3]/div[1]/dl/dd[1]/p[1]/span/text()')
+    buwei = tree.xpath('/html/body/div[3]/div[1]/dl/dt/p[2]/span/text()')
+    related_diseases = tree.xpath('/html/body/div[3]/div[1]/dl/dd[1]/p[2]/span/a/text()')
+    affected_people = tree.xpath('/html/body/div[3]/div[1]/dl/dt/p[3]/span/text()')
+    related_inspect = tree.xpath('/html/body/div[3]/div[1]/dl/dd[1]/p[3]/span/text()')
+    treatment = tree.xpath('/html/body/div[3]/div[1]/dl/dt/p[5]/span/text()')
+    related_operation = tree.xpath('/html/body/div[3]/div[1]/dl/dd[1]/p[4]/span/text()')
+    is_infect = tree.xpath('/html/body/div[3]/div[1]/dl/dt/p[5]/span/text()')
+    related_drugs = tree.xpath('/html/body/div[3]/div[1]/dl/dd[1]/p[5]/span/text()')
+    is_inherit = tree.xpath('/html/body/div[3]/div[1]/dl/dt/p[6]/span/text()')
+    treat_cost = tree.xpath('/html/body/div[3]/div[1]/dl/dd[1]/p[6]/span/text()')
+    print(f'''
+        departments:\t{departments}
+        related_symptom:\t{related_symptom}
+        buwei:\t{buwei}
+        related_diseases:\t{related_diseases}
+        affected_people:\t{affected_people}
+        related_inspect:\t{related_inspect}
+        treatment:\t{treatment}
+        related_operation:\t{related_operation}
+        is_infect:\t{is_infect}
+        related_drugs:\t{related_drugs}
+        is_inherit:\t{is_inherit}
+        treat_cost:\t{treat_cost}
+    ''')
+
+
 
 
 async def get_and_parse_page(url, parse_func):
