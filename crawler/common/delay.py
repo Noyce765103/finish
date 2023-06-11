@@ -12,6 +12,18 @@ class Delay:
 
     def delay(self, second):
         random_second = random.randint(self.lb, self.ub) * random.uniform(1.0, 2.0) + random.gauss(self.mu, self.sigma)
+        if random_second < 0:
+            random_second = -random_second
         print(second + random_second)
         time.sleep(random_second)
+        return
+    
+    def seconds(self, second):
+        random_second = random.randint(self.lb, self.ub) * random.uniform(1.0, 2.0) + random.gauss(self.mu, self.sigma)
+        print(second + random_second)
+        return random_second
+
+    
+    def sleep(self, second):
+        time.sleep(second)
         return
