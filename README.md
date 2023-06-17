@@ -25,6 +25,8 @@
 1. [python异步下载文件教程（主打全面）](https://blog.51cto.com/lilongsy/6149231)
 2. [利用LLM做多模态任务](https://zhuanlan.zhihu.com/p/616351346)
 3. [知识注入预训练模型](https://blog.csdn.net/wang2008start/article/details/118371860)
+4. [知识表示与融入技术](https://mp.weixin.qq.com/s/necu4iBO6SZG7ImCPMKS4w)
+5. [融入知识的预训练语言模型](https://zhuanlan.zhihu.com/p/350649740)
 
 
 ## Paper
